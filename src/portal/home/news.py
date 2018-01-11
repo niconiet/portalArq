@@ -1,6 +1,6 @@
 import dokuwiki
-from datetime import datetime
 import time
+from .credentials import login
 
 
 class WikiNews:
@@ -46,7 +46,7 @@ class WikiNews:
 def wiki_news():
     """Returns list of last week WikiNews object"""
     result = []
-    wiki = dokuwiki.DokuWiki("http://sisarqwiki.corp.cablevision.com.ar", "nrnieto", "_Stallman1¿'")
+    wiki = dokuwiki.DokuWiki("http://sisarqwiki.corp.cablevision.com.ar", login["user"], login["password"])
     changes = wiki.pages.changes(int(time.time() - 604800))
     for value in changes:
         print(value["lastModified"])
